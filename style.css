@@ -540,7 +540,7 @@ ul {
 
 .services .container .service:hover {
     background-color: #0603af;
-    transition: 0.3s;
+    transition: 0.5s;
 }
 
 .services .container .service .img {
