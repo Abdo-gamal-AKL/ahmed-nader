@@ -117,26 +117,25 @@ ul {
     transform: translateY(-50%);
 }
 
-.header .info {
+.header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 450px;
+    width: 100%;
 }
 
-.header .info ul {
+.header ul {
     display: flex;
     align-items: center;
     justify-content: start;
-    margin: auto;
 }
 
-.header .info ul li {
+.header ul li {
     padding: 10px 20px;
     position: relative;
 }
 
-.header .info ul li::after {
+.header ul li::after {
     content: "";
     opacity: 0;
     transition: 0.5s;
@@ -146,7 +145,7 @@ ul {
     transform: translateX(-50%);
 }
 
-.header .info ul li:hover::after {
+.header ul li:hover::after {
     content: "";
     opacity: 1;
     transition: 0.5s;
@@ -160,7 +159,7 @@ ul {
     background-color: #0078f8;
 }
 
-.header .info ul li a {
+.header ul li a {
     font-weight: 600;
     transition: 0.3s;
     font-size: 16px;
@@ -168,18 +167,18 @@ ul {
     text-decoration: none;
 }
 
-.header .info ul li:hover a {
+.header ul li:hover a {
     color: rgb(146, 146, 146);
 }
 
-.header .info .img {
+.header .img {
     height: 57px;
     width: 57px;
     border-radius: 50%;
     overflow: hidden;
 }
 
-.header .info .img img {
+.header .img img {
     height: 231%;
     position: relative;
     top: -9px;
@@ -196,9 +195,56 @@ ul {
     object-fit: contain;
 }
 
+.navbar {
+    display: none !important;
+}
 /* small screens */
 
 @media (max-width: 768px) {
+    .navbar {
+        display: block !important;
+    }
+    .header .container .links {
+        display: none;
+    }
+    .header .container .dropdown-menu {
+        display: flex;
+        flex-direction: column;
+        width: 250px;
+        padding: 15px 0;
+    }
+    .header .container .container-fluid {
+        position: relative;
+    }
+
+    .header .container .navbar-collapse li a {
+        width: 100%;
+        height: 100%;
+        display: inline-block;
+        padding: 10px;
+        color: #eee;
+    }
+
+    .header .container .navbar-collapse li::before,
+    .header .container .navbar-collapse li::after {
+        content: "";
+        height: 0px;
+        width: 0px;
+    }
+
+    .header .container .navbar-collapse li {
+        padding: 0px;
+        width: 100%;
+        text-align: center;
+    }
+
+    .header .container .navbar-collapse {
+        width: 250px;
+        position: absolute;
+        z-index: 100000000000000;
+        top: 50px;
+        right: 50px;
+    }
     .header .name {
         color: #0078f8;
         font-family: "Kdam Thmor Pro", sans-serif;
@@ -210,48 +256,17 @@ ul {
         cursor: pointer;
     }
 
-    .header .info ul li a {
+    .header ul li a {
         font-weight: 600;
         transition: 0.3s;
         font-size: 14px;
         color: #565656;
         text-decoration: none;
     }
-    .header .info ul {
+    .header ul {
         padding: 0;
         width: 296px;
         justify-content: end;
-    }
-    .header .info {
-        width: 354px;
-    }
-}
-
-@media (max-width: 538px) {
-    .header .container {
-        flex-direction: column;
-    }
-    .header .info ul {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 100%;
-    }
-    .header .info ul li {
-        padding: 10px;
-    }
-    .header .info {
-        width: 100%;
-    }
-
-    .header .info .img {
-        height: 50px;
-    }
-}
-
-@media (max-width: 327px) {
-    .header .info {
-        flex-direction: column;
     }
 }
 
@@ -328,7 +343,7 @@ ul {
 
 .landing .container .text > span {
     color: white;
-    background-color: #000;
+    background-color: #06283d;
     display: block;
     padding: 5px 15px 15px;
     overflow: hidden;
@@ -351,7 +366,7 @@ ul {
 }
 
 .landing .text button {
-    background-color: black;
+    background-color: #06283d;
     color: white;
     font-size: 25px;
     font-weight: bold;
@@ -387,6 +402,20 @@ ul {
         position: absolute;
         opacity: 1;
         transform: translateY(-20px);
+    }
+}
+
+@keyframes textButtonMedia {
+    0% {
+        position: absolute;
+        transform: translateY(100px);
+        opacity: 0;
+    }
+
+    100% {
+        position: absolute;
+        opacity: 1;
+        transform: translateY(0px);
     }
 }
 
@@ -518,6 +547,16 @@ ul {
     .landing .container .text {
         font-size: 28px;
     }
+    .landing .container .text button {
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .landing .container .text button span {
+        font-size: 18px;
+        animation: textButtonMedia 1s linear both 3s !important;
+    }
 }
 
 /* Landing */
@@ -538,11 +577,15 @@ ul {
     padding: 5px 15px 100px;
     text-align: center;
     cursor: pointer;
+    transition: 1s;
 }
 
 .services .container .service:hover {
-    background-color: #0603af;
-    transition: 0.5s;
+    background-color: #0078f8;
+    transition: 1s;
+}
+.services .container .service .img i {
+    font-size: 30px;
 }
 
 .services .container .service .img {
@@ -553,14 +596,17 @@ ul {
     border-radius: 29px;
     background-color: #f3f3ff;
     transition: 0.3s;
-}
-.services .container .service .img img {
-    object-fit: cover;
-    opacity: 0.2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .services .container .service:hover .img {
-    background-color: #06049d;
+    background-color: #005ec39c;
+}
+
+.services .container .service:hover .img i {
+    color: rgb(64, 64, 64);
 }
 
 .services .container .service .name,
@@ -579,10 +625,6 @@ ul {
     font-weight: 600;
 }
 
-.services .container .service:hover .name,
-.services .container .service:hover .description {
-    color: #d3d3d3;
-}
 /* Services */
 
 /* Skills */
@@ -682,7 +724,7 @@ ul {
     padding: 2px 5px;
     border-radius: 4px;
     color: white;
-    background-color: black;
+    background-color: #06283d;
     right: -20px;
     top: -36px;
     font-size: 14px;
@@ -771,6 +813,70 @@ ul {
     transform: scale(1.2) rotate(5deg);
 }
 
+.work .expand-img,
+.work .expand-img .overlay,
+.work .expand-img img,
+.work .expand-img .img {
+    width: 0px;
+    height: 0px;
+
+    overflow: hidden;
+}
+
+.work .expand-img i {
+    display: none;
+}
+
+.work .expand-img.active i {
+    cursor: pointer;
+    display: block;
+    color: white;
+    position: fixed;
+    top: 10px;
+    right: 25px;
+    z-index: 1000000000000000000000000000000000000000000000000000;
+    font-size: 30px;
+    transition: 0.5s;
+}
+
+.work .expand-img.active i:hover {
+    color: rgb(194, 194, 194);
+}
+
+.work .expand-img.active {
+    width: 100%;
+    height: 100%;
+}
+
+.work .expand-img.active .overlay {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    background-color: black;
+    opacity: 0.8;
+    z-index: 100000000000000000000000000000000000000000000;
+    top: 0;
+    left: 0;
+}
+
+.work .expand-img.active img {
+    height: 90%;
+    width: 90%;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    object-fit: contain;
+    z-index: 100000000000000000000000000000000;
+}
+
+@media (min-width: 767px) {
+    .work .expand-img.active img {
+        width: 700px;
+        height: 550px;
+    }
+}
+
 /* Work */
 
 /* Contact me */
@@ -780,8 +886,7 @@ ul {
     align-items: center;
 }
 
-.contact .container .info {
-    width: 44%;
+.contact .container {
     padding-top: 30px;
 }
 
@@ -803,7 +908,7 @@ ul {
     font-weight: 700;
 }
 
-.contact .container .info p {
+.contact .container p {
     width: 400px;
     line-height: 1.6;
     font-size: 16px;
@@ -812,14 +917,14 @@ ul {
     padding: 10px 0 60px;
 }
 
-.contact .container .info .contact_info .icon {
+.contact .container .contact_info .icon {
     display: flex;
     align-items: center;
     justify-content: start;
     margin: 15px 0;
 }
 
-.contact .container .info .contact_info .icon span {
+.contact .container .contact_info .icon span {
     display: block;
     padding-left: 40px;
     color: #333;
@@ -829,12 +934,12 @@ ul {
     transition: 0.3s;
 }
 
-.contact .container .info .contact_info .icon span:hover {
+.contact .container .contact_info .icon span:hover {
     transition: 0.3s;
     color: rgb(142, 142, 142);
 }
 
-.contact .container .info .contact_info .icon img {
+.contact .container .contact_info .icon img {
     height: 25px;
     width: 25px;
     opacity: 0.8;
@@ -859,7 +964,7 @@ ul {
 }
 
 .contact .container .contact_box form textarea {
-    height: 125px;
+    height: 125px !important;
 }
 
 .contact .container .contact_box form button {
@@ -881,7 +986,7 @@ ul {
         max-width: 350px;
     }
 
-    .contact .container .info p {
+    .contact .container p {
         width: 100%;
     }
     .contact .container .contact_info {
@@ -893,7 +998,7 @@ ul {
     .contact .container {
         flex-direction: column;
     }
-    .contact .container .info,
+    .contact .container,
     .contact .container .contact_box {
         width: 100%;
         text-align: center;
@@ -943,7 +1048,7 @@ ul {
 
 .footer ul li:nth-of-type(3) a {
     font-weight: bold;
-    font-size: 14px;
+    font-size: 30px;
     color: white;
     text-decoration: none;
     transition: 0.3s;
